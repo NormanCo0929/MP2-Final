@@ -3,22 +3,23 @@ import axios from "axios"
 import SingleContent from "../../components/SingleContent/SingleContent"
 import CustomPagination from "../Pagination/CustomPagination"
 import Genres from "../Genres/Genres"
+import useGenre from "../../hooks/useGenre"
 import "./Movie.css"
 
 const Movie = () => {
 
-    const [genres, setGenres] = useState([])
-    const [selectedGenres, setSelectedGenres] = useState([])
     const [page, setPage] = useState(1)
     const [content, setContent] = useState([])
     const [numOfPages, setNumOfPages] = useState()
+    const [selectedGenres, setSelectedGenres] = useState([])
+    const [genres, setGenres] = useState([])
+    const genreforURL = useGenre(selectedGenres)
     
 
     const fetchMovies = async () => {
     const { data } = await axios.get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=fd1210df2a8d5a285861160abceb6cbd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`
+            `https://api.themoviedb.org/3/discover/movie?api_key=fd1210df2a8d5a285861160abceb6cbd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
         )
-        console.log(data.results)
         setContent(data.results)
         setNumOfPages(data.total_pages)
     }
