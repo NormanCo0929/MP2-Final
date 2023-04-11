@@ -1,15 +1,5 @@
-.trend {
-    margin: 140px 0 140px 0;
-}
-
 .trending {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-}
-
-@media (max-width: 1000px) {
-    .trend {
-        margin: 100px 0 120px 0;
-    }
 }

@@ -11,21 +11,22 @@ const Trending = () => {
     const fetchTrending = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/all/day?api_key=fd1210df2a8d5a285861160abceb6cbd&page=${page}`
-    )
-    console.log(data.results)
-    setContent(data.result)
-  }
+    );
+
+    setContent(data.results);
+  };
 
   useEffect(() => {
-    window.scroll(0, 0)
-    fetchTrending()
-  }, [page])
+    window.scroll(0, 0);
+    fetchTrending();
+  }, [page]);
     
     return (
-        <div className="trend">
-            <span  className="pageTitle">Trending</span>
+        <div className="movie-page">
+            <span  className="page-title">Trending</span>
             <div className="trending">
-                {content && content.map((c) => (<SingleContent 
+                {content && content.map((c) => (
+                <SingleContent 
                 key={c.id} 
                 id={c.id} 
                 poster={c.poster_path}
